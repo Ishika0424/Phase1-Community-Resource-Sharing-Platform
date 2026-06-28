@@ -165,4 +165,4 @@ npm run dev
 - Direct API routes for posting and editing require a valid JSON Web Token (`x-auth-token` or `Bearer Token`).
 
 ## Author
--Ishika Garg
+Ishika Garg
