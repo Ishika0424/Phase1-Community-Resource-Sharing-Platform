@@ -43,6 +43,13 @@ const seedData = async () => {
     await Skill.deleteMany({});
     console.log('Cleared existing resources and skills...');
 
+    // Delete any stale users that are not in our list
+    const allowedEmails = ['ishika.garg123@gmail.com', ...additionalUsersData.map(u => u.email)];
+    const deleteResult = await User.deleteMany({ email: { $nin: allowedEmails } });
+    if (deleteResult.deletedCount > 0) {
+      console.log(`Cleaned up ${deleteResult.deletedCount} old/stale users from database.`);
+    }
+
     // Ensure main tester/existing user exists
     let mainUser = await User.findOne({ email: 'ishika.garg123@gmail.com' });
     if (!mainUser) {
