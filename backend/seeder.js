@@ -52,11 +52,7 @@ const seedData = async () => {
 
     // Ensure main tester/existing user exists
     let mainUser = await User.findOne({ email: 'ishika.garg123@gmail.com' });
-    if (!mainUser) {
-      // Find any first user as fallback
-      mainUser = await User.findOne({});
-    }
-
+ 
     if (!mainUser) {
       console.log('No existing user found. Creating primary tester user...');
       mainUser = await User.create({
@@ -69,7 +65,9 @@ const seedData = async () => {
       });
       console.log(`Created primary user: ${mainUser.email} (Password: password123)`);
     } else {
-      console.log(`Using existing primary user: ${mainUser.email} (${mainUser.name})`);
+      mainUser.password = 'password123'; // Reset password to password123 so it's always testable
+      await mainUser.save();
+      console.log(`Using and updating primary user: ${mainUser.email} (Password set to: password123)`);
     }
 
     // Ensure the 3 additional users exist
