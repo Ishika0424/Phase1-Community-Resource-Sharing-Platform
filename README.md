@@ -163,3 +163,6 @@ npm run dev
 - Environment configuration parameters (such as `JWT_SECRET` and `MONGO_URI`) are located inside `backend/.env` which is configured in `.gitignore` so they are never leaked online.
 - Password hashes are stored safely using `bcryptjs` encryption.
 - Direct API routes for posting and editing require a valid JSON Web Token (`x-auth-token` or `Bearer Token`).
+
+## Author
+Ishika Garg
