@@ -76,7 +76,13 @@ const seedData = async () => {
         u = await User.create(userData);
         console.log(`Created user: ${userData.email} (Password: ${userData.password})`);
       } else {
-        console.log(`User already exists: ${userData.email}`);
+        u.name = userData.name;
+        u.password = userData.password; // This triggers the pre-save bcrypt hash
+        u.phone = userData.phone;
+        u.address = userData.address;
+        u.locationName = userData.locationName;
+        await u.save();
+        console.log(`Updated user: ${userData.email} (Password updated to: ${userData.password})`);
       }
       users[userData.email] = u;
     }
